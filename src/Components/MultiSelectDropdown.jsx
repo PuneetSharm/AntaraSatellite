@@ -43,7 +43,7 @@ const MultiSelectDropdown = ({ options, selectedValues, onChange }) => {
             : "Select types"}
         </span>
         <svg
-          className={`w-4 h-4 ml-2 transform transition-transform duration-200 ${
+          className={`w-4 h-4 ml-2 transform transition-transform duration-200 text-gray-500 ${
             isOpen ? "rotate-180" : ""
           }`}
           fill="none"

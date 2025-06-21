@@ -5,9 +5,11 @@ const Search = ({
   handleSearchInput,
 }) => {
   return (
-    <div className="flex w-auto border shadow-md px-2 py-2 mx-2 my-2 items-center gap-4">
-      <div>
-        <label htmlFor="name">Name</label>
+    <div className="flex justify-between items-center px-4 py-4 bg-white shadow-sm border border-gray-200 rounded-md">
+      <div className="px-2 py-2">
+        <label className="text-sm font-medium text-gray-700" htmlFor="name">
+          Name
+        </label>
         <input
           id="name"
           placeholder="Enter Name..."
@@ -19,25 +21,33 @@ const Search = ({
           onKeyDown={handleSearchInput}
         />
       </div>
-
-      <label htmlFor="noRadCatId">NoRadCatId</label>
-      <input
-        id="noRadCatId"
-        type="text"
-        value={inputValue.noRadCatId}
-        name="noRadCatId"
-        placeholder="Enter noRadCatId here ..."
-        className="mx-2 rounded-md border border-gray-300 px-2 py-2"
-        onChange={handleInputChange}
-        onKeyDown={handleSearchInput}
-      />
-      <button
-        type="submit"
-        className="px-12 py-2 bg-blue-500 text-white rounded-md"
-        onClick={handleClick}
-      >
-        Search
-      </button>
+      <div className="px-2 py-2">
+        <label
+          className="text-sm font-medium text-gray-700"
+          htmlFor="noRadCatId"
+        >
+          NoRadCatId
+        </label>
+        <input
+          id="noRadCatId"
+          type="text"
+          value={inputValue.noRadCatId}
+          name="noRadCatId"
+          placeholder="Enter noRadCatId here ..."
+          className="mx-2 rounded-md border border-gray-300 px-2 py-2"
+          onChange={handleInputChange}
+          onKeyDown={handleSearchInput}
+        />
+      </div>
+      <div className="px-2 py-2">
+        <button
+          type="submit"
+          className="px-12 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md"
+          onClick={handleClick}
+        >
+          Search
+        </button>
+      </div>
     </div>
   );
 };

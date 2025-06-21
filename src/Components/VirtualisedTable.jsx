@@ -3,7 +3,7 @@ import { FixedSizeList as List } from "react-window";
 
 const VirtualizedTable = ({
   data,
-  height = 450,
+  height = 300,
   rowHeight = 50,
   handleSelectedRows,
   selectedRows,
@@ -37,7 +37,6 @@ const VirtualizedTable = ({
 
   return (
     <div className="border border-gray-200 rounded-md overflow-hidden w-full text-gray-800">
-      {/* Table Header */}
       <div className="flex items-center px-4 py-2 bg-gray-100 text-sm font-semibold border-b">
         <div className="w-10 px-2"></div>
         <div className="w-1/6">Name</div>
@@ -48,8 +47,12 @@ const VirtualizedTable = ({
         <div className="w-1/6">LaunchDate</div>
       </div>
 
-      {/* Virtualized Rows */}
-      <List height={height} itemCount={data.length} itemSize={rowHeight} width="100%">
+      <List
+        height={height}
+        itemCount={data.length}
+        itemSize={rowHeight}
+        width="100%"
+      >
         {Row}
       </List>
     </div>

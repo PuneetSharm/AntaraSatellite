@@ -12,7 +12,6 @@ import MultiSelectDropdown from "../Components/MultiSelectDropdown";
 import VirtualizedTable from "../Components/VirtualisedTable";
 import SortDropdown from "../Components/SortDropDown";
 import Spinner from "../Components/Spinner";
-import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [searchValues, setSearchValues] = useState({
@@ -25,8 +24,6 @@ const Dashboard = () => {
   const [selectedValuesOrbitalType, setSelectedValuesOrbitalType] = useState(
     []
   );
-
-  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -152,9 +149,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 space-y-6">
-      {/* Search Bar */}
-      <div className="flex justify-center">
+    <div className="container mx-auto px-4 py-4 space-y-3">
+      <h1 className="text-3xl text-center py-2">Satellites Information</h1>
+      <div className="flex justify-center items-center px-4 py-2">
         <Search
           inputValue={searchValues}
           handleInputChange={handleInputChange}
@@ -163,8 +160,7 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* Filters Section */}
-      <div className="flex flex-wrap items-center gap-6 p-4 bg-white shadow-sm border border-gray-200 rounded-md">
+      <div className="flex justify-between items-center px-4 py-4 bg-white shadow-sm border border-gray-200 rounded-md">
         <div className="flex items-center gap-2">
           <p className="text-sm font-medium text-gray-700">
             Filter by Object Type:
@@ -187,22 +183,23 @@ const Dashboard = () => {
           />
         </div>
 
-        <button
-          onClick={handleSelectedFilter}
-          disabled={isDisabled}
-          className={`px-6 py-2 text-sm rounded-md transition ${
-            isDisabled
-              ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-              : "bg-indigo-600 hover:bg-indigo-700 text-white"
-          }`}
-        >
-          Filter
-        </button>
+        <div className="flex items-center">
+          <button
+            onClick={handleSelectedFilter}
+            disabled={isDisabled}
+            className={`px-12 py-2 text-sm rounded-md transition ${
+              isDisabled
+                ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 text-white"
+            }`}
+          >
+            Filter
+          </button>
+        </div>
       </div>
 
-      {/* Sort & Count Section */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        {dataPoint?.length > 0 && (
+        {dataPoint?.length > 0 && !isLoading && (
           <p className="text-sm text-gray-700 font-medium">
             Showing total count: {dataPoint.length}
           </p>
@@ -215,7 +212,6 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* Error Handling */}
       {responseError && (
         <div className="flex flex-col items-center justify-center p-6 border border-red-300 bg-red-50 rounded-md text-center space-y-2">
           <h1 className="text-xl font-bold text-red-500">Error Response</h1>
@@ -224,7 +220,6 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Table + Selection Info */}
       {!isLoading && !responseError && (
         <div className="flex flex-col gap-2 bg-white border border-gray-200 rounded-md shadow-sm p-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -234,7 +229,7 @@ const Dashboard = () => {
             {selectedRows.length > 0 && (
               <button
                 onClick={handleProceed}
-                className="px-6 py-2 text-sm bg-green-600 hover:bg-green-700 text-white rounded-md"
+                className="px-12 py-2 text-sm bg-green-600 hover:bg-green-700 text-white rounded-md"
               >
                 Proceed
               </button>
@@ -246,7 +241,6 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Data Table or Loading */}
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
           <Spinner />
