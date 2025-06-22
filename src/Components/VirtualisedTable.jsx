@@ -13,14 +13,12 @@ const VirtualizedTable = ({
     return (
       <div
         style={style}
-        className={`flex items-center px-4 text-sm border-b w-full ${
-          index % 2 === 0 ? "bg-white" : "bg-gray-50"
-        }`}
+        className={`flex items-center px-4 text-sm border-b w-full odd:bg-white even:bg-gray-50`}
       >
         <div className="w-10 px-2 flex justify-center">
           <input
             type="checkbox"
-            className="form-checkbox h-4 w-4 text-indigo-600"
+            className="form-checkbox h-4 w-4"
             checked={selectedRows.includes(index)}
             onChange={() => handleSelectedRows(row, index)}
           />

@@ -21,20 +21,19 @@ const Dashboard = () => {
   const [dataPoint, setDataPoint] = useState([]);
   const [overallDataPoint, setOverallDataPoint] = useState([]);
   const [selectedValuesObjectType, setSelectedValuesObjectType] = useState([]);
-  const [selectedValuesOrbitalType, setSelectedValuesOrbitalType] = useState(
+  const [selectedValuesOrbitalCode, setSelectedValuesOrbitalCode] = useState(
     []
   );
-
   const [isLoading, setIsLoading] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedRowData, setSelectedRowData] = useState([]);
   const [errorSelectedRows, setErrorSelectedRows] = useState("");
   const [sortedSelectedValue, setSortedSelectedValue] = useState("SNASC");
-  const [selectedRowData, setSelectedRowData] = useState([]);
   const [responseError, setResponseError] = useState(null);
 
   const isDisabled =
     selectedValuesObjectType.length === 0 &&
-    selectedValuesOrbitalType.length === 0;
+    selectedValuesOrbitalCode.length === 0;
 
   useEffect(() => {
     const getDataPoints = async () => {
@@ -110,19 +109,19 @@ const Dashboard = () => {
         overallDataPoint,
         selectedValuesObjectType
       );
-      if (selectedValuesOrbitalType.length > 0) {
+      if (selectedValuesOrbitalCode.length > 0) {
         const filteredDataAfterOrbital = filterByOrbitalCode(
           filteredData,
-          selectedValuesOrbitalType
+          selectedValuesOrbitalCode
         );
         setDataPoint(filteredDataAfterOrbital);
       } else {
         setDataPoint(filteredData);
       }
-    } else if (selectedValuesOrbitalType.length > 0) {
+    } else if (selectedValuesOrbitalCode.length > 0) {
       const filteredDataAfterOrbital = filterByOrbitalCode(
         overallDataPoint,
-        selectedValuesOrbitalType
+        selectedValuesOrbitalCode
       );
       setDataPoint(filteredDataAfterOrbital);
     }
@@ -178,8 +177,8 @@ const Dashboard = () => {
           </p>
           <MultiSelectDropdown
             options={orbitalCodeOptions}
-            selectedValues={selectedValuesOrbitalType}
-            onChange={setSelectedValuesOrbitalType}
+            selectedValues={selectedValuesOrbitalCode}
+            onChange={setSelectedValuesOrbitalCode}
           />
         </div>
 
@@ -198,14 +197,13 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="flex flex-row items-center justify-between gap-4">
         {dataPoint?.length > 0 && !isLoading && (
           <p className="text-sm text-gray-700 font-medium">
             Showing total count: {dataPoint.length}
           </p>
         )}
         <SortDropdown
-          label="Sort"
           options={sortOptions}
           selectedValue={sortedSelectedValue}
           handleChange={handleChangeSorting}
